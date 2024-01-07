@@ -1,0 +1,52 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Arquivo .editorconfig
+
+# Estilo de indentação: tabulações (1 tabulação)
+indent_style = tab
+indent_size = 2
+
+# Estilo de quebra de linha: LF (Unix-style)
+end_of_line = lf
+
+# Conjunto de caracteres: UTF-8
+charset = utf-8
+
+# Remover espaços em branco no final de cada linha
+trim_trailing_whitespace = false
+
+# Adicionar uma linha em branco no final do arquivo
+insert_final_newline = false
+
+# Configurações específicas para PHP (.php)
+[*.php]
+indent_style = tab
+indent_size = 4
+
+# Configurações específicas para JavaScript (.js)
+[*.js]
+indent_style = tab
+indent_size = 2
+
+# Configurações específicas para Dockerfile (.Dockerfile)
+[Dockerfile]
+indent_style = tab
+indent_size = 2
+
+# Configurações específicas para Docker Compose (.yml)
+[docker-compose.yml]
+indent_style = tab
+indent_size = 2
+
+# Configurações específicas para arquivos Apache (.conf)
+[*.conf]
+indent_style = tab
+indent_size = 4
+
+# Configurações específicas para arquivos SQL (.sql)
+[*.sql]
+indent_style = tab
+indent_size = 2

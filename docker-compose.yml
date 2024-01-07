@@ -1,0 +1,53 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:latest
+    container_name: 
+    environment:
+      MYSQL_DATABASE: 
+      MYSQL_USER: mysql_ci4docker
+      MYSQL_PASSWORD: passwd
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./mysql-data/docker-entrypoint-initdb.d" # Mapeia um diretório local para inicialização do banco de dados MySQL
+      - "./config/mysql-config.cnf:/etc/mysql/conf.d/config.cnf" # Mapeia um arquivo de configuração personalizado para o MySQL
+    networks:
+      - ci4_docker
+
+  www:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        USER_ID: ${USER_ID}
+        GROUP_ID: ${GROUP_ID}
+    container_name: 
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "./:/var/www/html" # Mapeia o diretório atual para o diretório padrão do Apache
+    extra_hosts:
+      - "host.docker.internal:host-gateway" # Configura o host.docker.internal para resolução no host-gateway
+    networks:
+      - ci4_docker
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: mysql_ci4docker
+      PMA_PASSWORD: 'passwd'
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    networks:
+      - ci4_docker
+
+networks:
+  ci4_docker:
+    driver: bridge # Configura a rede personalizada "ci4_docker" como uma rede de driver de bridge
