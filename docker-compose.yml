@@ -7,7 +7,7 @@ services:
       MYSQL_DATABASE: 
       MYSQL_USER: mysql_ci4docker
       MYSQL_PASSWORD: passwd
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_PASSWORD:
     ports:
       - "3306:3306"
     volumes:
